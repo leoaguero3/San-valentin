@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Quieres ser mi San Valentín?</title>
+    <style>
+        /* Estilos generales */
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #ffe4e1;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .gif {
+            width: 250px;
+            height: auto;
+            margin-top: 20px;
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+        button {
+            font-size: 18px;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .yes {
+            background-color: #ff69b4;
+            color: white;
+        }
+        .no {
+            background-color: #d3d3d3;
+            color: black;
+        }
+        .popup {
+            position: fixed;
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid #ff69b4;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 18px;
+            z-index: 1000;
+        }
+
+        /* Estilos para la segunda pantalla */
+        .new-body {
+            font-family: 'Great Vibes', cursive;
+            background-color: #ffebee;
+            color: #c62828;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        h1 {
+            font-size: 4rem;
+            margin-top: 2rem;
+            animation: heartbeat 1.5s infinite;
+        }
+        p {
+            font-size: 1.5rem;
+            margin: 1rem 0;
+        }
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        .new-container {
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            margin: 2rem auto;
+            max-width: 800px;
+        }
+        .hearts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        .hearts span {
+            position: absolute;
+            display: block;
+            width: 20px;
+            height: 20px;
+            background: #ff6b6b;
+            clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 50% 75%, 18% 100%, 0% 38%);
+            animation: float 5s infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(-10%); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(110%); opacity: 0; }
+        }
+        .love-button {
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .love-button:hover {
+            background-color: #c62828;
+        }
+        footer {
+            margin-top: 3rem;
+            font-size: 1rem;
+            color: #c62828;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>¿Mi pimpollo hermoso, quieres ser mi San Valentín a pesar de estar lejitos? 💖</h1>
+        <img src="https://media.tenor.com/Bn88VELdNI8AAAAi/peach-goma.gif" alt="Peach Goma Gif 1" class="gif">
+        <img src="https://media.tenor.com/cbEccaK9QxMAAAAi/peach-goma.gif" alt="Peach Goma Gif 2" class="gif">
+        <img src="https://i.pinimg.com/originals/db/aa/c1/dbaac13f6278b91a15e480752b8a7242.gif" alt="Gif romántico" class="gif">
+        <div class="buttons">
+            <button class="yes" id="yes" onclick="aceptar()">Sí 💕</button>
+            <button class="no" id="no" onclick="insistir()">No 😢</button>
+        </div>
+    </div>
+
+    <script>
+        let intentos = 0;
+        let yesButton = document.getElementById("yes");
+        let noButton = document.getElementById("no");
+
+        function insistir() {
+            intentos++;
+            let mensajes = [
+                "¿Estás segura? 🥺", 
+                "Por favor aceptá 😭", 
+                "Te estoy viendo, Ludmila Antúnez 💔", 
+                "Prometo hacerte re feliz 💖", 
+                "Te voy a dar muchos abrazos, besos y pie de limón 💕", 
+                "No podés decir que no a tu esposo hermoso 🐱💞", 
+                "DALEE, es San Valentín! 💘"
+            ];
+            
+            let popup = document.createElement("div");
+            popup.classList.add("popup");
+            popup.innerText = mensajes[Math.min(intentos - 1, mensajes.length - 1)];
+            document.body.appendChild(popup);
+
+            setTimeout(() => {
+                popup.remove();
+            }, 2000);
+
+            if (intentos >= mensajes.length) {
+                noButton.style.display = "none";
+            }
+            
+            yesButton.style.fontSize = (18 + intentos * 5) + "px";
+        }
+
+        function aceptar() {
+            document.body.className = "new-body";
+            document.body.innerHTML = `
+                <div class="hearts">
+                    <span style="left: 10%; animation-delay: 0s;"></span>
+                    <span style="left: 20%; animation-delay: 2s;"></span>
+                    <span style="left: 30%; animation-delay: 4s;"></span>
+                    <span style="left: 40%; animation-delay: 1s;"></span>
+                    <span style="left: 50%; animation-delay: 3s;"></span>
+                    <span style="left: 60%; animation-delay: 5s;"></span>
+                    <span style="left: 70%; animation-delay: 2s;"></span>
+                    <span style="left: 80%; animation-delay: 4s;"></span>
+                    <span style="left: 90%; animation-delay: 1s;"></span>
+                </div>
+
+                <div class="new-container">
+                    <h1>¡Feliz San Valentín!</h1>
+                    
+                    <p>Mi amorcito hermoso, mi Pimpollo de mi vida
+
+Ya sé que esto no es lo más común, que la gente suele pedir estas cosas con una cartita en mano, con flores… Pero, ¿cuándo fuimos comunes nosotros? Nunca. Somos diferentes, somos únicos, y eso me encanta. Y así, de una manera distinta y especial, como todo con vos, te quiero pedir que seas mi San Valentín.
+
+Parece una boludez, pero para mí significa un montón. No solo porque es nuestro primer San Valentín juntos, sino porque cada día con vos es como un regalo que no me esperaba en la vida. Porque nunca pensé que iba a amar tanto a alguien, que iba a sentir esto, que me iba a volver loco por alguien así. Pero llegaste vos, con tu carita hermosa, con tu risa, con tu pelo que amo tocar, con tu olor que me vuelve adicto, con tu forma de ser que es simplemente perfecta para mí. Y ahí me tenés, sin escapatoria, perdido en vos.
+
+Desde aquel primer beso en el parque, cuando los dos estábamos re nerviosos y el mundo parecía pararse un segundo, supe que no había vuelta atrás. Ahí firmé mi condena, pero qué hermosa condena, porque es con vos. Después de ese día, me volví un ladrón de besos, buscando cualquier excusa para robarte uno en la mejilla, en la boca, en donde sea. Cada roce, cada mirada, cada sonrisa tuya me hacía latir el corazón de una manera que jamás había sentido. De ser alguien frío, alguien que no mostraba mucho lo que sentía, pasé a ser un tipo que se derrite por vos, que se obsesiona con tu amor, que no quiere separarse ni un segundo.
+
+Me diste algo que no sabía que necesitaba: amor del bueno, del real. Me enseñaste lo que es sentirse querido, mimado, acompañado. Y no hay mejor persona en el mundo para haberme hecho experimentar todo esto que vos, mi Pimpollo hermoso.
+
+Tal vez no soy perfecto, tal vez a veces me equivoco, pero si hay algo que es seguro, es que cada día intento ser mejor, por vos. Porque te merecés todo, lo mejor, lo más lindo, y porque yo solo quiero verte feliz. Quiero ser el que te haga reír, el que te mime cuando estés triste, el que te acompañe en todo. Porque vos sos la única persona con la que quiero estar siempre.
+
+Así que, Pimpollito mío, ¿querés ser mi San Valentín? Aunque, para ser sinceros, sos mucho más que eso. Sos mi amor, mi persona favorita, mi todo. Y te amo, de aquí a la luna a pasito de tortuga.
+
+Con todo mi amor, tu batsi.</p>
+                    <p>Te amo demasiado.</p>
+                    <button class="love-button">Ludmila Belén Antúnez, mi mujer, te amodoro</button>
+                </div>
+
+                <footer>
+                    <p>Hecho con ❤️ por Batsi</p>
+                </footer>
+            `;
+        }
+    </script>
+</body>
+</html>
